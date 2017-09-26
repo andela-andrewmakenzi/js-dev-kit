@@ -1,10 +1,10 @@
-var express = require('express');
-var app = express();
+import express from 'express';
+let app = express();
 
-var path = require('path');
-var open = require('open');
+import path from 'path';
+import open from 'open';
 
-var port = 3000;
+let port = 3000;
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './../src/index.html'));
