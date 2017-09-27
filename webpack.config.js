@@ -5,12 +5,11 @@ var extractPlugin = new extractTextPlugin({
 });
 
 module.exports = {
-  context: path.resolve(__dirname, "./src"),
-  entry: './js/index.js',
+  entry: './src/js/index.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './src/dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/dist'
   },
   module: {
     rules: [
@@ -27,13 +26,21 @@ module.exports = {
       {
         test: /\.(sass|scss)$/,
         use: extractPlugin.extract({
-          use: ['css-loader', 'scss-loader']
+          use: ['css-loader', 'sass-loader']
         })
-      }
+      },
+      {
+        test: /\.css$/,
+        use: extractPlugin.extract({
+          use: ['css-loader']
+        })
+      },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' }
     ]
   },
   plugins: [extractPlugin],
   devServer: {
-    contentBase: path.resolve(__dirname, "/src")
+    contentBase: path.resolve(__dirname, "./src"),
   }
 }

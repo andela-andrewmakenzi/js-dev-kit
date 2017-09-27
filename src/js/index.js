@@ -1,3 +1,3 @@
-function dox() {
-  alert('we are done');
-}
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import './../css/main.scss';
